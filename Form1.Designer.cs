@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.gen = new System.Windows.Forms.TabPage();
             this.itm = new System.Windows.Forms.TabPage();
@@ -39,17 +40,27 @@
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.copy = new System.Windows.Forms.Button();
+            this.resultbox = new System.Windows.Forms.TextBox();
             this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.françaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anglaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mon = new System.Windows.Forms.TabPage();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.mess = new System.Windows.Forms.GroupBox();
+            this.messtxt = new System.Windows.Forms.TextBox();
+            this.messsend = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
+            this.gen.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.mess.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.gen);
             this.tabControl1.Controls.Add(this.itm);
+            this.tabControl1.Controls.Add(this.mon);
             this.tabControl1.Controls.Add(this.GG);
             this.tabControl1.Controls.Add(this.fam);
             this.tabControl1.Controls.Add(this.stat);
@@ -61,6 +72,7 @@
             // 
             // gen
             // 
+            this.gen.Controls.Add(this.mess);
             this.gen.Location = new System.Drawing.Point(4, 22);
             this.gen.Name = "gen";
             this.gen.Padding = new System.Windows.Forms.Padding(3);
@@ -129,6 +141,9 @@
             // 
             // languageToolStripMenuItem
             // 
+            this.languageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.françaisToolStripMenuItem,
+            this.anglaisToolStripMenuItem});
             this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
             this.languageToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.languageToolStripMenuItem.Text = "Language";
@@ -147,21 +162,22 @@
             this.quitterToolStripMenuItem.Text = "Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.quitterToolStripMenuItem_Click);
             // 
-            // button1
+            // copy
             // 
-            this.button1.Location = new System.Drawing.Point(655, 507);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 27);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Copier la commande";
-            this.button1.UseVisualStyleBackColor = true;
+            this.copy.Location = new System.Drawing.Point(655, 507);
+            this.copy.Name = "copy";
+            this.copy.Size = new System.Drawing.Size(146, 27);
+            this.copy.TabIndex = 2;
+            this.copy.Text = "Copier la commande";
+            this.copy.UseVisualStyleBackColor = true;
+            this.copy.Click += new System.EventHandler(this.copy_Click);
             // 
-            // textBox1
+            // resultbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(4, 511);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(645, 20);
-            this.textBox1.TabIndex = 3;
+            this.resultbox.Location = new System.Drawing.Point(4, 510);
+            this.resultbox.Name = "resultbox";
+            this.resultbox.Size = new System.Drawing.Size(645, 20);
+            this.resultbox.TabIndex = 3;
             // 
             // aideToolStripMenuItem
             // 
@@ -169,21 +185,75 @@
             this.aideToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aideToolStripMenuItem.Text = "Aide";
             // 
+            // françaisToolStripMenuItem
+            // 
+            this.françaisToolStripMenuItem.Name = "françaisToolStripMenuItem";
+            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.françaisToolStripMenuItem.Text = "Français";
+            // 
+            // anglaisToolStripMenuItem
+            // 
+            this.anglaisToolStripMenuItem.Name = "anglaisToolStripMenuItem";
+            this.anglaisToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.anglaisToolStripMenuItem.Text = "Anglais";
+            // 
+            // mon
+            // 
+            this.mon.Location = new System.Drawing.Point(4, 22);
+            this.mon.Name = "mon";
+            this.mon.Size = new System.Drawing.Size(798, 444);
+            this.mon.TabIndex = 5;
+            this.mon.Text = "Monstre";
+            this.mon.UseVisualStyleBackColor = true;
+            // 
+            // mess
+            // 
+            this.mess.Controls.Add(this.messsend);
+            this.mess.Controls.Add(this.messtxt);
+            this.mess.Location = new System.Drawing.Point(8, 6);
+            this.mess.Name = "mess";
+            this.mess.Size = new System.Drawing.Size(609, 74);
+            this.mess.TabIndex = 0;
+            this.mess.TabStop = false;
+            this.mess.Text = "Message Collectif";
+            // 
+            // messtxt
+            // 
+            this.messtxt.Location = new System.Drawing.Point(6, 19);
+            this.messtxt.Name = "messtxt";
+            this.messtxt.Size = new System.Drawing.Size(597, 20);
+            this.messtxt.TabIndex = 0;
+            this.messtxt.Text = "Bonjour et bienvenue sur le serveur !";
+            // 
+            // messsend
+            // 
+            this.messsend.Location = new System.Drawing.Point(253, 45);
+            this.messsend.Name = "messsend";
+            this.messsend.Size = new System.Drawing.Size(109, 23);
+            this.messsend.TabIndex = 1;
+            this.messsend.Text = "Crée message";
+            this.messsend.UseVisualStyleBackColor = true;
+            this.messsend.Click += new System.EventHandler(this.messsend_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 535);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.resultbox);
+            this.Controls.Add(this.copy);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Outils Maitre de Jeu - Flyff";
             this.tabControl1.ResumeLayout(false);
+            this.gen.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.mess.ResumeLayout(false);
+            this.mess.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,8 +273,15 @@
         private System.Windows.Forms.TabPage fam;
         private System.Windows.Forms.TabPage stat;
         private System.Windows.Forms.ToolStripMenuItem aideToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button copy;
+        private System.Windows.Forms.TextBox resultbox;
+        private System.Windows.Forms.ToolStripMenuItem françaisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem anglaisToolStripMenuItem;
+        private System.Windows.Forms.TabPage mon;
+        private System.Windows.Forms.GroupBox mess;
+        private System.Windows.Forms.Button messsend;
+        private System.Windows.Forms.TextBox messtxt;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }
 

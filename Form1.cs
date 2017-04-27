@@ -26,5 +26,16 @@ namespace GM_Tools
         {
             Close();
         }
+
+        private void messsend_Click(object sender, EventArgs e)
+        {
+            resultbox.Text = "/sys " + "'" + messtxt.Text + "'";
+        }
+
+        private void copy_Click(object sender, EventArgs e)
+        {
+            String Resulttext = resultbox.Text;
+            Clipboard.SetText(Resulttext);
+        }
     }
 }
