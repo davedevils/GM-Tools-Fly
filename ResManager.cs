@@ -36,13 +36,13 @@ namespace GM_Tools
             //Decryptage de La Table des fichiers
             for (int i = 0; i < nFileHeaderSize; i++)
             {
-                byFileHeader[i] = (byte)((16 * (byEncryptionKey ^ ~byFileHeader[i])) | ((byEncryptionKey ^ ~byFileHeader[i]) >> 4));
+                byFileHeader[i] = (byte)((16 * (byEncryptionKey ^ (byte)~byFileHeader[i])) | ((byEncryptionKey ^ (byte)~byFileHeader[i]) >> 4));
             }
             BinaryReader BrDecryptTableFile       = new BinaryReader(new MemoryStream(byFileHeader));
             byte[] byVersion                    = BrDecryptTableFile.ReadBytes(7); 
             int  nFileNumber                    = BrDecryptTableFile.ReadInt16();
 
-            SubFiles = new StructResReader[nFileNumber];
+           SubFiles = new StructResReader[nFileNumber];
             nTotalFiles = nFileNumber;
             for (int i = 0; i < nFileNumber; i++)
             {
@@ -61,7 +61,7 @@ namespace GM_Tools
                     // si fichier est crypter on utilise la clé + les fonctions algebre 
                     for (int j = 0; j < SubFiles[i].nFileSize; j++)
                     {
-                        byFileContents[j] = (byte)((16 * (byEncryptionKey ^ ~byFileContents[j])) | ((byEncryptionKey ^ ~byFileContents[j]) >> 4));
+                        byFileContents[j] = (byte)((16 * (byEncryptionKey ^ (byte)~byFileContents[j])) | ((byEncryptionKey ^ (byte)~byFileContents[j]) >> 4));
                     }
                 }
 
@@ -77,10 +77,19 @@ namespace GM_Tools
                 string FilePath = "ExtractedRes/" + SubFiles[i].strFileName;
                 using (System.IO.FileStream fs = System.IO.File.Create(FilePath))
                 {
-                    //fs.Write(SubFiles[i].strFileContents, 0, SubFiles[i].nFileSize);
+                    SubFiles[i].strFileContents = SubFiles[i].strFileContents.Replace("\x00", "");
+                    byte[] byFileContent = Encoding.ASCII.GetBytes(SubFiles[i].strFileContents);
+                    fs.Write(byFileContent, 0, byFileContent.Length);
+                    fs.Close();
                 }
             }
            
+        }
+
+        public void EmptyMemory()
+        {
+            SubFiles = null;
+            nTotalFiles = 0;
         }
 
     }

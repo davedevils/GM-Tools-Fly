@@ -68,7 +68,11 @@ namespace GM_Tools
 
         private void miseÀJourParLesRESToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            ResManager Data1 = new ResManager();
+
+            Data1.LoadRes("data.res");
+            Data1.SaveAllDecryptRes();
+            Data1.EmptyMemory();
         }
     }
 
