@@ -64,8 +64,8 @@ namespace GM_Tools
                         byFileContents[j] = (byte)((16 * (byEncryptionKey ^ (byte)~byFileContents[j])) | ((byEncryptionKey ^ (byte)~byFileContents[j]) >> 4));
                     }
                 }
-
-                SubFiles[i].strFileContents = Encoding.ASCII.GetString(byFileContents);
+                // On encrypte le contenu pour ne pas le modifier a cause de l'encodage
+                SubFiles[i].strFileContents = Convert.ToBase64String(byFileContents);
             }
         }
 
@@ -77,8 +77,17 @@ namespace GM_Tools
                 string FilePath = "ExtractedRes/" + SubFiles[i].strFileName;
                 using (System.IO.FileStream fs = System.IO.File.Create(FilePath))
                 {
+                    // on vire les curieux glif ?
+                    if(SubFiles[i].strFileContents.Substring(0, 2) == "\x3f\x3f")
+                    {
+                        SubFiles[i].strFileContents = SubFiles[i].strFileContents.Substring(2);
+                    }
+
+                    // on supprime les NULL 
                     SubFiles[i].strFileContents = SubFiles[i].strFileContents.Replace("\x00", "");
-                    byte[] byFileContent = Encoding.ASCII.GetBytes(SubFiles[i].strFileContents);
+
+                    // on décrypt et on envois sans encodage
+                    byte[] byFileContent = Convert.FromBase64String(SubFiles[i].strFileContents);
                     fs.Write(byFileContent, 0, byFileContent.Length);
                     fs.Close();
                 }
