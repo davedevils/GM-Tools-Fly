@@ -16,5 +16,15 @@ namespace GM_Tools
         {
             InitializeComponent();
         }
+
+        private void creditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
